@@ -1,0 +1,59 @@
+---
+title: "BioEnrichR User Manual"
+author: "Abdullahi Haji, Boyu Tong and María Sáez Carazo"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+This manual explains how the package BioEnrichR should be used. The package is meant to execute an enrichment analysis on a RNA-seq dataset. It contains three functions that will be further explain next.
+
+## Installation
+
+```{r eval=FALSE}
+install.packages(BioEnrichR)
+library(BioEnrichR)
+```
+
+## Functions
+1. calculateDEGs:
+This function calculates differentially expressed genes (DEGs) based on expression count data.  
+DEGs are identified using the edgeR package and filtered based on False Discovery Rate (FDR)and log fold change (logFC) thresholds. The results are written to Excel files.  
+An example on how to run this function alone:
+```{r eval=FALSE}
+# Input_File: Path to the expression counts files.
+# Output_File_1: Path to .xlsx file containing the list for most significant DEGs.
+# Output_File_2: Path to .xlsx file containing the list of all DEGs unfiltered.
+# Sample_Group: Vector to specifies the columns are control or disease.
+
+calculateDEGs(Input_File,Output_File_1,Output_File_2,Sample_Group)
+```
+
+2. enrichGONE:
+This function performs gene ontology (GO) enrichment analysis using the clusterProfiler package.  
+It reads gene expression data from specified input files, converts gene symbols to ENTREZ IDs, performs enrichment analysis, generates various plots, and exports the results to an Excel file.  
+An example on how to run this function alone:
+```{r eval=FALSE}
+#Input_File_1: Path to the DEGs for the genes input in enrichGO.
+# Input_File_2: Path to the DEGs for the universe input in enrichGO.
+# Output_File: Path to the .xlsx file containing the results of enrichGO analysis.
+
+enrichGONE(Input_File_1,Input_File_2,Output_File)
+```
+
+3. enrichKEG:
+This function performs Kyoto Encyclopedia of Genes and Genomes (KEGG) pathway enrichment analysis on a set of genes.  
+It utilizes the clusterProfiler package to analyze gene lists against KEGG pathways, generating various plots and exporting the results to an Excel file.
+The function reads gene expression data, converts gene symbols to ENTREZ IDs, and performs the enrichment analysis.  
+An example on how to run this function alone:
+```{r eval=FALSE}
+# Input_File_1: Path to the DEGs for the genes input in enrichKEGG
+# Input_File_2: Path to the DEGs for the universe input in enrichKEGG
+# Output_File: Path to the .xlsx file containing the results of enrichKEGG analysis.
+
+enrichKEG(Input_File_1,Input_File_2,Output_File)
+```
