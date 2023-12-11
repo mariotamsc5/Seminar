@@ -1,11 +1,10 @@
 Package: BioEnrichR
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Enrichment analysis on an RNA-seq dataset
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Abdullahi Haji, Boyu Tong and María Sáez Carazo
+Maintainer: d21abdha@student.his.se, a20boyto@student.his.se, n21marsa@student.his.se
+Description: The package is able to import RNA-seq count data into R and perform filtering.    It contains functions to perform statistical analysis to identify differentially expressed genes,    to perform over-representation analysis,    and finally it exports the data with differentially expressed genes to Excel and creates the pertinent plots.
+License: GPL-3.0
 Encoding: UTF-8
 LazyData: true
