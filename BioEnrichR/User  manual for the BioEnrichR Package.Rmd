@@ -1,0 +1,219 @@
+---
+title: "User  manual for the BioEnrichR Package"
+author: "Abdullahi Haji,Maria Saez Carazo,Boyu Tong"
+date: "2023-12-11"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# BioEnrichR: A Specialized R Package for Gene Expression Data Analysis
+
+BioEnrichR is a specialized R package designed to facilitate the analysis of gene expression data, particularly in the context of biological research and genomics. The package provides a suite of tools for the comprehensive analysis of differentially expressed genes (DEGs) and for conducting enrichment analysis, including Gene Ontology (GO) and Kyoto Encyclopedia of Genes and Genomes (KEGG) pathway analyses.
+
+## Key Functionalities of the BioEnrichR Package
+
+### Differential Gene Expression Analysis
+
+The package offers a robust framework for calculating DEGs from gene expression data. Users can input expression count data, and the package utilizes the edgeR package to identify DEGs based on specified criteria, such as False Discovery Rate (FDR) and log fold change (logFC). The results are conveniently saved in Excel format for further analysis and visualization.
+
+### Gene Ontology Enrichment Analysis
+
+This feature allows users to perform GO enrichment analysis, which is crucial for understanding the functional aspects of the gene expression data. The package reads the gene expression data, converts gene symbols to ENTREZ IDs, and performs GO enrichment analysis using the clusterProfiler package. It generates various plots to visualize the enrichment analysis results and exports these results to an Excel file for easy access and interpretation.
+
+### KEGG Pathway Enrichment Analysis
+
+BioEnrichR facilitates KEGG pathway analysis, providing insights into the biological pathways that are significantly represented in the gene list. The function reads gene expression data, performs necessary conversions of gene identifiers, and carries out enrichment analysis against KEGG pathways. Similar to GO analysis, it provides visualization tools and exports the results for further examination.
+
+BioEnrichR is designed with ease of use in mind, catering to both beginners and advanced users in the field of bioinformatics and genomic research. Its integration of various analysis and visualization tools into a single package streamlines the workflow in gene expression studies, making it an invaluable tool for biological data analysis.
+
+
+# Installation of the BioEnrichR Package
+
+The BioEnrichR package is a tool for gene expression data analysis. To install this package, please ensure that you have R version 3.5.0 or higher installed on your system.
+
+## Installing the Development Version from GitHub
+
+The latest development version of BioEnrichR is available on GitHub. You can use the devtools` package to install it directly from there.
+
+Before proceeding, ensure that the devtools` package is installed on your system. If not, you can install it using the following command in your R console:
+
+
+```{r }
+#install.packages("devtools")
+```
+
+Then, install BioEnrichR using devtools::install_github():
+
+```{r}
+#devtools::install_github("mariotamsc5/Seminar/BioEnrichR")
+
+```
+
+# Dependencies for BioEnrichR Package
+
+The BioEnrichR package leverages functionalities from several other R packages, making these packages essential dependencies for its optimal operation. When you install BioEnrichR, these dependencies should typically be installed automatically. However, if you encounter any issues with missing dependencies, you can manually install them.
+
+## List of Dependencies
+
+- edgeR: Used for differential gene expression analysis.
+- openxlsx: Facilitates reading from and writing to Excel files.
+- clusterProfiler: Enables statistical analysis and visualization of functional profiles for genes and gene clusters.
+- org.Hs.eg.db: Provides mappings between Entrez gene IDs and common gene symbols.
+- enrichplot: Offers visualization functionalities for enrichment results.
+- ggnewscale: Useful for creating complex plots with ggplot2.
+- ggupset: Extends ggplot2 for creating UpSet plots.
+
+## Installing Dependencies
+
+Open your R console and use the install.packages() function to install each of these packages. Here's how you can do it:
+```{r}
+#install.packages("edgeR")
+#install.packages("openxlsx")
+#install.packages("clusterProfiler")
+#install.packages("org.Hs.eg.db")
+#install.packages("enrichplot")
+#install.packages("ggnewscale")
+#install.packages("ggupset")
+```
+
+Note: Some of these packages, like clusterProfiler and org.Hs.eg.db, are part of the Bioconductor project, and you need to use Bioconductor’s installation method:
+
+
+```{r}
+#if (!requireNamespace("BiocManager", quietly = TRUE))
+ #   install.packages("BiocManager")
+
+#BiocManager::install("clusterProfiler")
+#BiocManager::install("org.Hs.eg.db")
+```
+
+#Loading Dependencies
+
+Once installed, you can load these packages in your R session as needed. For instance:
+```{r}
+#library(edgeR)
+#library(openxlsx)
+# and so forth for the other packages
+```
+
+# Basic Usage of BioEnrichR Package
+
+The BioEnrichR package is designed for comprehensive gene expression and enrichment analysis. Below is a simple example demonstrating how to use the package, followed by details of its core functions.
+
+
+```{r}
+# Assuming BioEnrichR is installed and loaded
+#library(BioEnrichR)
+
+# Calculate differentially expressed genes (DEGs)
+#result <- calculateDEGs("path/to/expression_counts.txt",
+ #                       "path/to/significant_DEGs.xlsx",
+  #                      "path/to/all_DEGs.xlsx",
+   #                     c(1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1),
+    #                    verbose = FALSE)
+
+# Perform Gene Ontology Enrichment Analysis
+#enrichGONE("path/to/DEGs.xlsx", "path/to/universe_genes.xlsx", "path/to/enrichGONE_results.xlsx")
+
+# Perform KEGG Pathway Enrichment Analysis
+#enrichKEG("path/to/DEGs.xlsx", "path/to/universe_genes.xlsx", "path/to/enrichKEGG_results.xlsx")
+
+```
+
+# Functions
+
+## calculateDEGs
+
+### Description
+
+The calculateDEGs function calculates differentially expressed genes from gene expression count data. It utilizes the edgeR package for statistical analysis, filtering DEGs based on specified FDR and logFC thresholds.
+
+### Parameters
+
+- Input_File: Path to the expression counts file.
+- Output_File_1: Path to the .xlsx file where significant DEGs will be saved.
+- Output_File_2: Path to the .xlsx file where all DEGs will be saved, unfiltered.
+- Sample_Group: Numeric vector specifying columns in count data as control or disease.
+- FDR_Threshold: FDR cutoff for filtering DEGs (default 0.05).
+- logFC_Threshold: Log fold change cutoff for filtering DEGs (default 1.3).
+- verbose: Boolean for printing additional information (default TRUE).
+
+### Return Value
+
+A list containing two elements:
+- Significant_DEGs: DEGs filtered based on FDR and logFC.
+- All_DEGs: All DEGs unfiltered.
+
+### Example
+```{r}
+#de_results <- calculateDEGs("data/expression_counts.txt",
+            #                "results/significant_DEGs.xlsx",
+           #                 "results/all_DEGs.xlsx",
+            #                 c(1, 1, 0, 0),
+              #              verbose = TRUE)
+
+```
+
+
+# Functions
+
+## enrichGONE
+
+### Description
+
+The enrichGONE function performs Gene Ontology enrichment analysis on a given list of genes. It reads DEGs data, maps gene symbols to ENTREZ IDs, and uses clusterProfiler to perform and visualize the GO enrichment analysis.
+
+### Parameters
+
+- Input_File_1`: Path to the .xlsx file with DEGs for GO analysis.
+- Input_File_2`: Path to the .xlsx file with universe genes.
+- Output_File`: Path for saving enrichGO analysis results.
+
+### Return Value
+
+No direct return value; the function generates plots and saves results to an Excel file.
+
+### Example
+
+```{r}
+#enrichGONE("data/DEGs.xlsx", "data/universe_genes.xlsx", "results/GO_analysis.xlsx")
+
+```
+
+# Functions
+
+## enrichKEG
+
+### Description
+
+The enrichKEG` function conducts KEGG pathway enrichment analysis. It processes input gene lists, performs KEGG pathway analysis, and generates various plots for interpretation.
+
+### Parameters
+
+- Input_File_1`: Path to the .xlsx file with DEGs for KEGG analysis.
+- Input_File_2`: Path to the .xlsx file with universe genes.
+- Output_File`: Path for saving enrichKEGG analysis results.
+
+### Return Value
+
+Similar to enrichGONE`, it does not return a direct value but saves results and generates plots.
+
+
+### Example
+```{r}
+#enrichKEG("data/DEGs.xlsx", "data/universe_genes.xlsx", "results/KEGG_analysis.xlsx")
+
+```
+
+
+# Contributing
+
+Contributions to BioEnrichR are welcome! Please refer to our contributing guidelines for more information.
+
+# License
+
+BioEnrichR is released under the GNU General Public License v3.0 License.
+
