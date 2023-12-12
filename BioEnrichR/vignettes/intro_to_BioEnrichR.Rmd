@@ -1,0 +1,155 @@
+---
+title: "Vignette for the BioEnrichR Package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette for the BioEnrichR Package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+#library(BioEnrichR)
+```
+
+# Brief introduction on BioEnrichR pakacge 
+BioEnrichR is a valuable tool for analyzing gene expression data, especially in the context of biological research and genomics. It provides a comprehensive suite of tools for analyzing differentially expressed genes (DEGs) and conducting enrichment analysis, including Gene Ontology (GO) and Kyoto Encyclopedia of Genes and Genomes (KEGG) pathway analyses.
+
+## Installing the  BioEnrichR pakacge from GitHub
+BioEnrichR, a valuable tool for gene expression data analysis, is accessible directly from GitHub. It can be installed using the devtools package in R. 
+
+Before you begin the installation process, please confirm that the devtools package is already installed on your system. If it's not, you can easily install it by executing the following command in your R console: 
+
+```{r}
+install.packages("devtools")
+```
+
+Once devtoolsis installed, you can proceed with the installation of BioEnrichR.
+
+```{r}
+#devtools::install_github("mariotamsc5/Seminar/BioEnrichR")
+
+```
+
+# Basic Usage of BioEnrichR Package
+
+The BioEnrichR package is a simple tool designed to streamline the analysis of gene expression data, particularly in the context of biological research and genomics. It comprises three interconnected functions: analyzeDifferentialExpression, performGeneEnrichmentAnalysis, and performKEGGAnalysis`. 
+
+Each function plays a crucial role in the data analysis process:
+
+- analyzeDifferentialExpression: Processes RNA-seq expression data for the identification of differentially expressed genes (DEGs).
+- performGeneEnrichmentAnalysis: Conducts Gene Enrichment Analysis using data from DEG analysis.
+- performKEGGAnalysis: Performs KEGG Pathway Enrichment Analysis on DEGs.
+
+These functions work in synergy, each contributing to a different stage of the analysis pipeline. Detailed usage instructions for each function are provided below to guide you through the process.
+
+# Usage of analyzeDifferentialExpression function 
+
+The analyzeDifferentialExpression function is a powerful tool designed to process RNA-seq expression data, enabling the identification of differentially expressed genes (DEGs). This function is particularly beneficial in the field of bioinformatics, where it can be used to analyze gene expression data in disease studies or developmental changes.
+
+## Key Features
+
+- **Normalization**: The function utilizes methods from the edgeR package to normalize gene expression data.
+- **DEG Identification**: DEGs are identified based on specified thresholds for False Discovery Rate (FDR) and log fold change (logFC).
+- **Data Export**: The function outputs a list of significant DEGs and all DEGs (unfiltered) in Excel format.
+
+## Usage
+
+The function requires four main inputs:
+
+- expressionDataPath: The path to the raw expression counts file.
+- significantDEGsOutputPath: The path for the output file containing significant DEGs.
+- allDEGsOutputPath: The path for the output file containing all DEGs, unfiltered.
+- groupClassification: A binary vector classifying the samples into groups (e.g., control vs. disease).
+
+## Example
+
+Here's a basic example of how to use analyzeDifferentialExpression:
+
+```{r}
+#library(BioEnrichR)
+
+# Paths to input and output files
+#expressionDataPath <- "path/to/E-MTAB-2523.counts.txt"
+#significantDEGsOutputPath <- "path/to/Significant_DEGs.xlsx"
+#allDEGsOutputPath <- "path/to/All_DEGs.xlsx"
+
+# Sample group classification (1 for disease, 0 for control)
+#groupClassification <- c(1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1)
+
+# Running the analysis
+#analyzeDifferentialExpression(expressionDataPath,
+       #                       significantDEGsOutputPath,
+    #                          allDEGsOutputPath,
+     #                         groupClassification)
+
+```
+
+# Usage of performGeneEnrichmentAnalysis function
+The performGeneEnrichmentAnalysis function, included in the DEGpathwayAnalysis package, is specifically designed to facilitate Gene Enrichment Analysis. It processes data from differential gene expression (DEG) analysis using the enrichGO function from the clusterProfiler package.
+
+## Functionality
+
+- **Input Data**: The function requires two main data files:
+    - A file containing DEGs for the genes input in enrichGO.
+    - A file containing DEGs for the universe input in enrichGO.
+- **Analysis**: The function carries out Gene Enrichment Analysis and returns significant gene ontology terms.
+- **Visualization**: The function generates various plots (barplot, dotplot, upset plot) for visualizing enrichment.
+- **Output**: The function exports the results of the enrichGO analysis to an Excel file.
+
+This function provides a comprehensive and streamlined approach to Gene Enrichment Analysis, making it a valuable tool for bioinformatics research.
+
+```{r}
+#library(DEGpathwayAnalysis)
+
+# Define file paths
+#genesFilePath <- "path/to/DEGs_genes.xlsx"
+#universeFilePath <- "path/to/DEGs_universe.xlsx"
+#enrichmentResultsPath <- "path/to/enrichment_results.xlsx"
+
+# Perform gene enrichment analysis
+#performGeneEnrichmentAnalysis(genesFilePath, universeFilePath, enrichmentResultsPath)
+
+```
+
+# How to use performKEGGAnalysis function
+The performKEGGAnalysisfunction, part of the DEGpathwayAnalysis package, is designed to facilitate KEGG Pathway Enrichment Analysis on differentially expressed genes (DEGs). This function leverages the enrichKEGG function from the clusterProfiler` package, providing a streamlined process for integrating DEG data into KEGG pathway analysis.
+
+## Key Features
+
+- **Input Data**: The function accepts DEG data files for gene input and universe input in enrichKEGG.
+- **Analysis**: The function performs KEGG Pathway Enrichment Analysis, which is beneficial in biological and medical research.
+- **Visualization**: The function generates barplot, dotplot, and upset plot to visualize the enrichment results.
+- **Output**: The function exports the results of the enrichKEGG analysis to an Excel file for further analysis.
+
+## Usage
+
+The function requires three primary arguments:
+
+- genesDataPath: Path to the DEGs file for genes input in enrichKEGG`.
+- universeDataPath: Path to the DEGs file for universe input in enrichKEGG.
+- keggResultsPath: Path where the enrichKEGG analysis results will be saved as an Excel file.
+
+## Example
+
+Here's an example of how to use performKEGGAnalysis`:
+
+```{r}
+#library(DEGpathwayAnalysis)
+
+# Define the file paths
+#genesDataPath <- "path/to/your/DEGs_genes.xlsx"
+#universeDataPath <- "path/to/your/DEGs_universe.xlsx"
+#keggResultsPath <- "path/to/your/kegg_results.xlsx"
+
+# Execute KEGG Pathway Enrichment Analysis
+#performKEGGAnalysis(genesDataPath, universeDataPath, keggResultsPath)
+
+```
+
