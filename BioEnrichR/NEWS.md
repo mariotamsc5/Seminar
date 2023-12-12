@@ -13,7 +13,7 @@ The following files can be found with useful information about the package:
 
 The following folders can be found with useful files and manuals of the package:
 * R: R source code files
-* Data: Test datasets
 * man: Reference documentation
-* Tests: Automated unit tests for package functions
+* Tests:
+  + Data: Test datasets
 * Vingettes: User manuals
