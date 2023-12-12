@@ -1,9 +1,9 @@
 # BioEnrichR 1.0.0
 This package is intended to execute an enrichment analysis on a RNA-seq dataset
 ## Functions or features
-* `calculateDEGs()` calculate DEGs filtered by an FDR of <0.05 and an absolute logFC value of >1.3. The output given is the path to .xlsx file containing the list for most significant DEGs and of all DEGs unfiltered.
-* `enrichGONE()` executes the plots with enrichGO. The output given is the path to the .xlsx file containing the results of enrichGO analysis.
-* `enrichKEG()` executes the plots with enrichKEG. The output given is the path to the .xlsx file containing the results of enrichKEGG analysis.
+* `calculateDEGs()` calculates differentially expressed genes from gene expression count data. It utilizes the edgeR package for statistical analysis, filtering DEGs based on specified FDR and logFC thresholds. 
+* `enrichGONE()` performs Gene Ontology enrichment analysis on a given list of genes. It reads DEGs data, maps gene symbols to ENTREZ IDs, and uses clusterProfiler to perform and visualize the GO enrichment analysis.
+* `enrichKEG()` conducts KEGG pathway enrichment analysis. It processes input gene lists, performs KEGG pathway analysis, and generates various plots for interpretation.
 ## Documentation
 The following files can be found with useful information about the package:
 * DESCRIPTION: Package meta-data
