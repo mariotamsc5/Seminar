@@ -4,10 +4,11 @@ BioEnrichR is an R package for executing enrichment analysis on a RNA-seq datase
 
 ## Installation
 
-Use the install function to install BioEnrichR.
+BioEnrichR, a valuable tool for gene expression data analysis, is accessible directly from GitHub. It can be installed using the devtools package in R, which means that the devtools package must be already installed on your system.  
+Once devtools is installed, you can proceed with the installation of BioEnrichR.
 
-```r
-install.packages(BioEnrichR)
+```{r}
+devtools::install_github("mariotamsc5/Seminar/BioEnrichR")
 ```
 
 ## Contributing
